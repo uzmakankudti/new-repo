@@ -1,0 +1,23 @@
+{
+  "name": "bus",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uzmakankudti/new-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uzmakankudti/new-repo/issues"
+  },
+  "homepage": "https://github.com/uzmakankudti/new-repo#readme",
+  "description": "",
+  "dependencies": {
+    "mongoose": "^8.16.5"
+  }
+}
