@@ -35,7 +35,6 @@ export const addUser = asyncHandler(async (req, res) => {
         phoneNumber: user.phoneNumber,
         address: user.address,
         email: user.email,
-        password: user.password,
         gender: user.gender,
         role: user.role,
       },
@@ -54,6 +53,7 @@ export const listAllUser = asyncHandler(async (req, res) => {
     const user = await User.find({});
     return res.status(200).json({
       success: true,
+      data:user,
     });
   } catch (error) {
     return res.status(404).json({
@@ -65,16 +65,109 @@ export const listAllUser = asyncHandler(async (req, res) => {
 
 export const findGender = asyncHandler(async (req,res)=>{
     try{
-        const maleCount=await user.count({gender:"MALE"});
-        const femaleCount=await user.count({gender:"FEMALE"});
-        const otherCount=await user.count({gender:"OTHER"});
-        return res.status(400).json({
+        const maleCount=await User.countDocuments({gender:"MALE"});
+        const femaleCount=await User.countDocuments({gender:"FEMALE"});
+        const otherCount=await User.countDocuments({gender:"OTHER"});
+        return res.status(200).json({
             success:true,
-            msg:"ok",
+            msg:"gender count fetched",
+            data:{
+              MALE:maleCount,
+              FEMALE:femaleCount,
+              OTHER:otherCount,
+            },
         });
     }catch(error){
         return res.status(500).json({
-            msg:"internal server error"
-        })
+            msg:"internal server error",
+            error:error.message,
+        });
     }
-})
+});
+
+export const updateUser=asyncHandler(async(req,res)=>{
+  const {userId}=req.params;
+  const updateData=req.body;
+  
+  const user=await User.findById(userId);
+  if(!user){
+    return res.status(404).json({
+      success:false,
+      message:"user not found"
+    });
+  }
+ 
+  user.userName=updateData.userName||user.userName;
+  user.email=updateData.email||user.email;
+  user.phoneNumber=updateData.phoneNumber||user.phoneNumber;
+  
+  const updatedUser = await user.save();
+  res.status(200).json({
+     success: true, 
+     data: updatedUser
+  });
+});
+
+export const getUserById=asyncHandler(async(req,res)=>{
+  const {userId}=req.params;
+  const user=await User.findById(userId);
+  if(!user){
+    return res.status(404).json({
+      success:false,
+      message:"user not found",
+    });
+  }
+  return res.status(200).json({
+    success:true,
+    message:"user found with this id",
+    data:user,
+  });
+});
+
+export const deleteUser= asyncHandler(async(req,res)=>{
+  const {userId}=req.params;
+  try{
+    const user=await User.findById(userId);
+    if(!user){
+      return res.status(404).json({
+        success:false,
+        message:"user not found",
+      });
+    }
+    await user.deleteOne();
+    
+    return res.status(200).json({
+      success:true,
+      message:"User delete successfully",
+  });
+
+  }catch(error){
+    return res.status(500).json({
+      success:false,
+      message:"internal server error",
+      error:error.message,
+    });
+  }
+ });
+
+
+/*
+export const deleteUser = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: "User not found",
+    });
+  }
+
+  await user.deleteOne(); // or: await User.findByIdAndDelete(userId);
+
+  return res.status(200).json({
+    success: true,
+    message: "User deleted successfully",
+  });
+});
+*/
