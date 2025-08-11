@@ -1,11 +1,14 @@
-import userRouter from "./userRoutes.js";
+import userRouter from "./userRouter.js";
 import busRouter from "./busRouter.js";
 import express from "express"
 import routesRouter from "./routesRouter.js";
-import bookingRoutes from "./bookingRoutes.js";
+import bookingRouter from "./bookingRouter.js";
+
 const router = express.Router();
+
 router.use("/user", userRouter);
 router.use("/bus",busRouter);
 router.use("/route",routesRouter);
-router.use("/booking",bookingRoutes);
+router.use("/booking",bookingRouter);
+
 export default router;

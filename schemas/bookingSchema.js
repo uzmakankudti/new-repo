@@ -31,6 +31,8 @@ const bookingSchema=new mongoose.Schema({
         default:"PENDING",
     },
 },{timestamps:true});
+
 const Booking=mongoose.model("booking",bookingSchema);
 export default Booking;
 
+//export default mongoose.models.Booking || mongoose.model("Booking", bookingSchema);

@@ -13,5 +13,8 @@ const passengerSchema=new mongoose.Schema({
         required:true,
     },
 });
+
 const Passenger=mongoose.model("passenger",passengerSchema);
 export default Passenger;
+
+//export default mongoose.models.Passenger || mongoose.model("Passenger", passengerSchema);

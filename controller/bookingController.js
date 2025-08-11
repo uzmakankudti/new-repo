@@ -50,3 +50,72 @@ export const createBooking = asyncHandler(async (req, res) => {
     }
 });
 
+export const getAllBookings=asyncHandler(async(req,res)=>{
+    try{
+        const bookings=await Booking.find();
+        
+        if(!bookings){
+            return res.status(404).json({success: false, msg:"Bookings Not found"})
+        }
+        return res.status(200).json({
+            success:true,
+            message:"all the bookings data",
+            data:bookings
+        });
+        /*
+        .populate("bus")
+        .populate("routes");
+        res.json(bookings);
+        */
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            error:error.message
+        });
+    }
+});
+
+export const getBookingById=asyncHandler(async(req,res)=>{
+    try{
+        const{bookingId}=req.params;
+        const booking=await Booking.findById(bookingId);
+        if(!bookingId){
+            return res.status(404).json({
+                success:false,
+                message:"booking not found",
+            });
+        }return res.status(200).json({
+            success:true,
+            message:"booking details",
+            data:booking
+        });
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            message:"server error"
+        });
+    }
+});
+
+export const updateBooking=asyncHandler(async(req,res) => {
+    try{
+        const{bookingId}=req.params;
+        const updates=req.body;
+        const bus=await Bus.findByIdAndUpdate(bookingId,updates,{new:true});
+        if(!bookingId){
+            return res.status(404).json({
+                success:false,
+                message:"booking not found",
+            });
+            }return res.status(200).json({
+                success:true,
+                data:bus,
+            });
+        }catch(error){
+             return res.status(500).json({
+                success:false,
+                message:"server error",
+                error:error.message
+            });
+        }
+});

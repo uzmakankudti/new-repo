@@ -15,5 +15,8 @@ const busSchema=new mongoose.Schema({
         required:true,
     },
 });
+
 const Bus=mongoose.model("bus",busSchema);
 export default Bus;
+
+//export default mongoose.models.Bus || mongoose.model("Bus", busSchema);

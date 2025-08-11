@@ -9,6 +9,8 @@ const routesSchema=mongoose.Schema({
         required:true,
     },
 });
+
 const Routes=mongoose.model("routes",routesSchema);
 export default Routes;
 
+//export default mongoose.models.Routes || mongoose.model("Routes", routesSchema);
