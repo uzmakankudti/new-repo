@@ -9,7 +9,7 @@ import{
 
 const busRouter = express.Router();
 busRouter.route("/addbus").post(addbus);
-busRouter.route("/uzma").get(getAllBuses);
+busRouter.route("/all").get(getAllBuses);
 busRouter.route("/getBusById/:busId").get(getBusById);
 busRouter.route("/updateBus/:busId").put(updateBus);
 busRouter.route("/deleteBus/:busId").delete(deleteBus)

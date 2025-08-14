@@ -63,7 +63,7 @@ export const listAllUser = asyncHandler(async (req, res) => {
   }
 });
 
-export const findGender = asyncHandler(async (req,res)=>{
+export const countGender = asyncHandler(async (req,res)=>{
     try{
         const maleCount=await User.countDocuments({gender:"MALE"});
         const femaleCount=await User.countDocuments({gender:"FEMALE"});

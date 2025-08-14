@@ -47,7 +47,7 @@ export const getRouteById = asyncHandler(async (req, res) => {
             });
         } return res.status(200).json({
             success: true,
-            message: "all routes",
+            message: "routes",
             data: route
         });
     } catch (error) {
