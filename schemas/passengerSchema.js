@@ -8,11 +8,6 @@ const passengerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    gender:{
-        type:String,
-        enum:["FEMALE","MALE","OTHER"],
-        required:true
-    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

@@ -1,14 +1,14 @@
 import express from "express";
 
 import{
-      cancelBooking, 
       confirmBooking,
-      createBooking }from "../controller/bookingController.js";
+      createBooking, 
+      updateBooking}from "../controller/bookingController.js";
 
 const bookingRouter = express.Router();
 
 bookingRouter.route("/createBooking").post(createBooking);
 bookingRouter.route("/confirmBooking/:bookingId").post(confirmBooking);
-bookingRouter.route("/cancelBooking/:bookingId").post(cancelBooking);
+bookingRouter.route("/updateBooking/:bookingId").post(updateBooking);
 
 export default bookingRouter;

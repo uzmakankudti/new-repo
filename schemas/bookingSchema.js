@@ -29,6 +29,11 @@ const bookingSchema = new mongoose.Schema({
         enum: ["A", "B"],
         required: true
     },
+     seatType:{
+        type:String,
+        enum:["SLEEPER","SEATER"],
+        required:true,
+    },
 
     paymentMethod: {
         type: String,

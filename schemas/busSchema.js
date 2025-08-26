@@ -9,11 +9,13 @@ const busSchema=new mongoose.Schema({
         unique:true,
         required:true,
     },
+    /*
     seatType:{
         type:String,
         enum:["SLEEPER","SEATER"],
         required:true,
     },
+    */
 });
 
 const Bus=mongoose.model("bus",busSchema);

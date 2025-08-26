@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler";
 
 export const addbus=asyncHandler(async(req,res)=>{
     try{
-        const{name, number,seatType}=req.body;
+        const{name, number}=req.body;
         const existingBus=await Bus.findOne({number});
         if(existingBus){
             return res.status(400).json({
@@ -13,7 +13,7 @@ export const addbus=asyncHandler(async(req,res)=>{
                 data:existingBus,
             });
         }
-        const newBus=await Bus.create({name,number,seatType});
+        const newBus=await Bus.create({name,number});
         return res.status(201).json({
             success:true,
             data:newBus,
